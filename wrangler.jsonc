@@ -1,0 +1,23 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// A Worker with a script, unlike the static-only projects in this workspace.
+	// Search calls the model from the server, so there is real code to run and
+	// the TypeSafe key stays out of the browser.
+	"name": "jev-cordhub",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	// Bump this when you want newer runtime behaviour to apply.
+	"compatibility_date": "2026-09-18",
+	// Kept because the SvelteKit runtime reaches for Node APIs in places we do
+	// not control. Our own server modules import nothing from Node, which is
+	// checked by a test; this covers what the framework itself does.
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		// The adapter writes both the worker and the client build into this one
+		// directory, and the binding name is what the generated worker expects.
+		"directory": ".svelte-kit/cloudflare",
+		"binding": "ASSETS"
+	},
+	"observability": {
+		"enabled": true
+	}
+}

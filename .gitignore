@@ -1,0 +1,20 @@
+# Secrets. The project keeps its real .env one level up, outside this
+# repository, so this pattern is a belt-and-braces guard: a key that lands here
+# by accident must never be committed.
+.env
+.env.*
+!.env.example
+
+# Build output
+.wrangler/
+node_modules/
+build/
+.svelte-kit/
+vite.config.ts.timestamp-*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

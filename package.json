@@ -1,0 +1,28 @@
+{
+  "name": "jev-cordhub",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "bunx wrangler dev",
+    "catalog": "bun scripts/build-catalog.ts",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "svelte-kit sync && vitest run",
+    "verify": "bun run check && bun run test",
+    "deploy": "bun run build && bunx wrangler deploy"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-cloudflare": "^7.2.9",
+    "@sveltejs/adapter-node": "^5.5.7",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@types/node": "^26.6.2",
+    "svelte": "^5.57.1",
+    "svelte-check": "^4.7.6",
+    "typescript": "~6",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

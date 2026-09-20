@@ -1,0 +1,436 @@
+:root {
+	--bg: #0b0d10;
+	--line: rgba(255, 255, 255, 0.09);
+	--line-strong: rgba(255, 255, 255, 0.18);
+	--surface: #12151a;
+	--surface-raised: #171b21;
+	--text: #e7e9ec;
+	--text-dim: #99a1ab;
+	--text-faint: #667085;
+	--accent: #7cc4c1;
+	--accent-dim: rgba(124, 196, 193, 0.5);
+	--warn: #d8a657;
+	--radius: 9px;
+	--mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+	--sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--sans);
+	font-size: 15px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input {
+	font: inherit;
+	color: inherit;
+}
+
+.shell {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 0 20px 72px;
+}
+
+/*
+ * Nothing searched yet: sit low and centred, the way a search engine greets
+ * you, with the box as the only thing asking to be used. A fixed padding
+ * rather than flex centring, so the content that follows still flows below
+ * instead of being pulled into the middle of the page.
+ */
+.shell.landing {
+	max-width: 600px;
+	padding-top: 22vh;
+}
+
+/*
+ * Centring applies to the wordmark, the stats and the box, and stops there.
+ * Applied to the whole shell it also caught the About prose, and centred body
+ * text with uneven line lengths reads as a crooked block with ragged edges
+ * rather than as a tidy one. Prose stays left aligned.
+ */
+.shell.landing .topbar,
+.shell.landing .ask {
+	text-align: center;
+}
+
+/* Keep the About on the same column as everything above it. */
+.shell.landing details.more {
+	max-width: 480px;
+	margin-inline: auto;
+}
+
+/*
+ * Every block shares one width and one centre line. Left full-width, the
+ * search bar was much wider than the wordmark above it, and a centred stack
+ * with a wider base does not read as centred at all.
+ */
+.shell.landing .topbar,
+.shell.landing .ask form,
+.shell.landing .examples {
+	width: 100%;
+	max-width: 480px;
+	margin-inline: auto;
+}
+
+.shell.landing .topbar {
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	padding: 0 0 20px;
+}
+
+.shell.landing .examples {
+	justify-content: center;
+	margin-top: 16px;
+}
+
+.shell.landing footer {
+	justify-content: center;
+}
+
+/* Top bar: a wordmark and how fresh the catalogue is. No headline. ------ */
+
+.topbar {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px 20px;
+	padding: 20px 0 14px;
+	font-size: 12px;
+	color: var(--text-faint);
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-family: var(--mono);
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	color: var(--text-dim);
+	white-space: nowrap;
+}
+
+.brand::before {
+	content: '';
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--accent);
+	flex: none;
+}
+
+/* The three numbers that say how stale this answer could be. */
+.stats {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4px 14px;
+	font-family: var(--mono);
+}
+
+.stats span {
+	white-space: nowrap;
+}
+
+/* Search: the reason the page exists, so it sits first and sticks. ------- */
+
+.ask {
+	position: sticky;
+	top: 0;
+	z-index: 5;
+	padding-bottom: 12px;
+	background: linear-gradient(var(--bg) 72%, transparent);
+}
+
+.ask form {
+	display: flex;
+	gap: 8px;
+}
+
+.ask input {
+	flex: 1;
+	min-width: 0;
+	padding: 12px 14px;
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	outline: none;
+	transition: border-color 120ms ease;
+}
+
+.ask input:focus {
+	border-color: var(--accent-dim);
+}
+
+.ask input::placeholder {
+	color: var(--text-faint);
+}
+
+.ask button {
+	padding: 12px 18px;
+	background: var(--accent);
+	color: #06231f;
+	border: 0;
+	border-radius: var(--radius);
+	font-weight: 600;
+	cursor: pointer;
+	transition: opacity 120ms ease;
+}
+
+.ask button:disabled {
+	opacity: 0.35;
+	cursor: not-allowed;
+}
+
+/* Quiet pills rather than loose text, so four wrapped items still look placed. */
+.examples {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+	margin-top: 14px;
+}
+
+.examples button {
+	padding: 4px 11px;
+	background: transparent;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	color: var(--text-faint);
+	font-size: 12.5px;
+	line-height: 1.5;
+	cursor: pointer;
+	transition: color 120ms ease, border-color 120ms ease;
+}
+
+.examples button:hover {
+	color: var(--text-dim);
+	border-color: var(--line-strong);
+}
+
+/* Status ---------------------------------------------------------------- */
+
+.status {
+	margin: 18px 0;
+	font-size: 14px;
+	color: var(--text-dim);
+}
+
+.status.note {
+	padding: 14px 16px;
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	max-width: 68ch;
+}
+
+.status.error {
+	padding: 14px 16px;
+	background: rgba(216, 166, 87, 0.1);
+	border: 1px solid rgba(216, 166, 87, 0.3);
+	border-radius: var(--radius);
+	color: var(--warn);
+}
+
+.meter {
+	height: 2px;
+	margin-top: 12px;
+	background: var(--line);
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.meter span {
+	display: block;
+	height: 100%;
+	width: 30%;
+	background: var(--accent);
+	animation: sweep 1.1s ease-in-out infinite;
+}
+
+@keyframes sweep {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(340%);
+	}
+}
+
+/* Results --------------------------------------------------------------- */
+
+.group-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 22px 0 0;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--line);
+	font-family: var(--mono);
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-faint);
+}
+
+.hit {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: baseline;
+	gap: 2px 14px;
+	padding: 13px 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.hit-name {
+	font-family: var(--mono);
+	font-size: 13.5px;
+	color: var(--text);
+	overflow-wrap: anywhere;
+	transition: color 120ms ease;
+}
+
+.hit:hover .hit-name {
+	color: var(--accent);
+}
+
+.hit-scores {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	font-family: var(--mono);
+	font-size: 13px;
+}
+
+.hit-scores .rel {
+	color: var(--accent);
+}
+
+/* A weak match should not be coloured like a strong one. */
+.hit-scores .rel.low {
+	color: var(--text-faint);
+}
+
+.hit-scores .conf {
+	font-size: 11px;
+	color: var(--text-faint);
+}
+
+.hit-scores .conf.warn {
+	color: var(--warn);
+}
+
+.hit-desc {
+	grid-column: 1 / -1;
+	margin: 2px 0 0;
+	color: var(--text-dim);
+	font-size: 13.5px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.hit-detail {
+	grid-column: 1 / -1;
+	margin: 4px 0 0;
+	font-size: 12px;
+	color: var(--text-faint);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+.tag {
+	font-family: var(--mono);
+	font-size: 11px;
+	color: var(--accent);
+	background: rgba(124, 196, 193, 0.1);
+	padding: 1px 7px;
+	border-radius: 999px;
+}
+
+/* A second category, quieter than the first: it is a near-miss, not a claim. */
+.also {
+	font-size: 11.5px;
+	color: var(--text-faint);
+	font-style: italic;
+}
+
+.hit.dim .hit-name,
+.hit.dim .hit-scores .rel {
+	color: var(--text-dim);
+}
+
+.hit.dim .tag {
+	color: var(--text-faint);
+	background: rgba(255, 255, 255, 0.04);
+}
+
+details.more {
+	margin-top: 26px;
+	padding-top: 14px;
+	border-top: 1px solid var(--line);
+}
+
+details.more > summary {
+	cursor: pointer;
+	font-family: var(--mono);
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-faint);
+	list-style: none;
+}
+
+details.more > summary::-webkit-details-marker {
+	display: none;
+}
+
+details.more > summary::before {
+	content: '+ ';
+}
+
+details.more[open] > summary::before {
+	content: '- ';
+}
+
+details.more p {
+	margin: 12px 0 0;
+	font-size: 13px;
+	color: var(--text-faint);
+	max-width: 70ch;
+}
+
+/* Footer ---------------------------------------------------------------- */
+
+footer {
+	margin-top: 30px;
+	padding-top: 14px;
+	border-top: 1px solid var(--line);
+	font-family: var(--mono);
+	font-size: 11px;
+	color: var(--text-faint);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 16px;
+}
