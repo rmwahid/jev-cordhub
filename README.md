@@ -3,6 +3,8 @@
 Search a Discord channel that was used as a GitHub bookmark pile. Ask in plain language, get back
 the repositories that fit.
 
+![A search for "saya ingin belajar tentang security" returning twenty repositories with relevance and confidence figures](docs/demo.gif)
+
 ## The problem
 
 A channel between friends that does exactly one thing: someone finds a repository worth keeping and
